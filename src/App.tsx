@@ -1,15 +1,12 @@
-import Sidebar from "./components/Sidebar"
-import ChatPane from "./components/ChatPane"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from "@/pages/Home"
 
 export default function App() {
     return (
-        <div className="font-serif bg-background text-foreground flex flex-row w-screen h-screen">
-            <div className="w-[18rem] lg:w-92">
-                <Sidebar />
-            </div>
-            <div className="w-full">
-                <ChatPane />
-            </div>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={ <Home />} />
+            </Routes>
+        </BrowserRouter>
     )
 }
