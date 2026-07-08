@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
 import Home from "@/pages/Home"
-import PageNotFound from "./pages/PageNotFound"
+import Import from "@/pages/Import"
+import PageNotFound from "@/pages/PageNotFound"
 import Sidebar from "./components/Sidebar"
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
             <Routes>
                 <Route element={<Layout />}>
                     <Route path="/" element={<Home />} />
+                    <Route path="/import" element={<Import />} />
                 </Route>
                 <Route path="/*" element={<PageNotFound />} />
             </Routes>
