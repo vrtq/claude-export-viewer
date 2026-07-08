@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: "Anthropic Serif";
+  src: url('assets/fonts/AnthropicSerif.woff2');
+}
+
+@font-face {
+  font-family: "Anthropic Sans";
+  src: url('assets/fonts/AnthropicSans.woff2');
+}
+
+@font-face {
+  font-family: "Anthropic Mono";
+  src: url('assets/fonts/AnthropicMono.woff2');
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary: var(--primary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card: var(--card);
+  --color-card-secondary: var(--card-secondary);
+  --color-sidepanel: var(--sidepanel);
+  --color-border: color-mix(in srgb, var(--border) 15%, transparent);
+  --font-sans: "Anthropic Sans";
+  --font-serif: "Anthropic Serif";
+}
+
+:root {
+  --primary: #d97757;
+  --background: #f8f8f6;
+  --foreground: #0b0b0b;
+  --muted-foreground: #7b7974;
+  --card: #ffffff;
+  --card-secondary: #f9f9f7;
+  --sidepanel: #f7f7f4;
+  --border: #1F1F1E;
+}
+
+.dark {
+  --primary: #d97757;
+  --background: #1f1f1e;
+  --foreground: #ffffff;
+  --muted-foreground: #c3c2b7;
+  --card: #2c2c2a;
+  --card-secondary: #363635;
+  --sidepanel: #1d1d1c;
+  --border: #E2E1DA;
+}
