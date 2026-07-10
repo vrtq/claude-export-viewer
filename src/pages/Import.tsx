@@ -1,9 +1,10 @@
 import { useRef, useState } from "react"
 import { FileUploader } from "react-drag-drop-files";
+import { set } from "idb-keyval";
 
 export default function Import() {
     const inputRef = useRef<HTMLInputElement>(null);
-    const [files, setFiles] = useState<File[] | null>(null)
+    const [files, setFiles] = useState<File[] | null>(null);
 
     function handleSubmit() {
         if (!files) {
@@ -39,7 +40,7 @@ export default function Import() {
 
             if (firstEntry?.chat_messages) {
                 // This is the users conversations
-                localStorage.setItem("conversations", JSON.stringify(parsedData));
+                set("conversations", (parsedData));
             } 
             else if (firstEntry?.conversations_memory) {
                 // This is memory
@@ -57,8 +58,8 @@ export default function Import() {
 
         if (parsedData?.docs) {
             // This is a project
-            const prevProjects = JSON.parse(localStorage.getItem("projects") ?? "") ?? [];
-            localStorage.setItem("conversations", JSON.stringify([...prevProjects, parsedData]));
+            const prevProjects = JSON.parse(localStorage.getItem("projects") ?? "[]") ?? [];
+            localStorage.setItem("projects", JSON.stringify([...prevProjects, parsedData]));
         }
     }
 
