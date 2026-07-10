@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
 import Home from "@/pages/Home"
 import Import from "@/pages/Import"
 import PageNotFound from "@/pages/PageNotFound"
-import Sidebar from "./components/Sidebar"
+import Chat from "./pages/Chat"
+import Sidebar from "@/components/Sidebar"
 
 export default function App() {
     return (
@@ -11,6 +12,7 @@ export default function App() {
                 <Route element={<Layout />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/import" element={<Import />} />
+                    <Route path="/chat/:id" element={<Chat />} />
                 </Route>
                 <Route path="/*" element={<PageNotFound />} />
             </Routes>
