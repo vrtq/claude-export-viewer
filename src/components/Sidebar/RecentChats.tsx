@@ -14,9 +14,9 @@ export default function RecentChats() {
     }, []);
 
     return (
-        <div className="text-muted-foreground font-sans h-full overflow-auto">
+        <div className="text-muted-foreground font-sans h-full overflow-y-auto overflow-x-visible">
             <p className="text-muted-foreground/75 text-xs p-2 pl-0">Recents</p>
-            <ul className="flex flex-col -mt-2">
+            <ul className="flex flex-col -mt-2 ">
                 {
                     recentChats.length > 0
                     ? recentChats.map(chat => <Chat data={chat} /> )
@@ -29,9 +29,9 @@ export default function RecentChats() {
 
 function Chat({ data }: { data: Conversation; }) {
     return (
-        <li key={data.uuid} className="mt-1 -translate-x-2 p-2 text-foreground-secondary rounded-lg hover:bg-accent hover:text-foreground">
+        <li key={data.uuid} className="mt-1 py-1 pr-2 text-foreground-secondary rounded-lg hover:bg-accent hover:text-foreground">
             <Link to={`/chat/${data.uuid}`}>
-                <p className="text-sm -2 overflow-hidden text-ellipsis truncate ">{data.name}</p>
+                <p className="text-sm  pl-2 overflow-hidden text-ellipsis truncate ">{data.name}</p>
             </Link>
         </li>
     )
