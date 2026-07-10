@@ -5,6 +5,63 @@ export default function Import() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [files, setFiles] = useState<File[] | null>(null)
 
+    function handleSubmit() {
+        if (!files) {
+            console.error("No file submitted.");
+            return;
+        }
+
+        // Verify all files are JSON files
+        for (const file of files) {
+            if (file.type != "application/json") { 
+                console.error("Only JSON files allowed!");
+                return;
+            }
+        }
+
+        console.log("File passed!");
+        
+        // Parse files
+        for (const file of files) {
+            (async () => {
+               await parseFile(file);
+            })();
+        }
+    }
+
+    async function parseFile(file: File) {
+        const parsedData = JSON.parse(await file.text());
+
+        // Finish parsing data and writing to correct 
+        if (Array.isArray(parsedData)) {
+            console.log("it is an array1");
+            const firstEntry = parsedData[0];
+
+            if (firstEntry?.chat_messages) {
+                // This is the users conversations
+                localStorage.setItem("conversations", JSON.stringify(parsedData));
+            } 
+            else if (firstEntry?.conversations_memory) {
+                // This is memory
+                localStorage.setItem("memory", JSON.stringify(parsedData));
+            }
+            else if (firstEntry?.email_address) {
+                // This is user data
+                localStorage.setItem("userData", JSON.stringify(parsedData));
+            }
+            else {
+                // None of the above
+                console.log("Could not find corresponding role.");
+            }
+        } 
+
+        if (parsedData?.docs) {
+            // This is a project
+            const prevProjects = JSON.parse(localStorage.getItem("projects") ?? "") ?? [];
+            localStorage.setItem("conversations", JSON.stringify([...prevProjects, parsedData]));
+        }
+    }
+
     return (
         <div className="bg-background w-full h-full p-8">
             { /* Centered */}
@@ -24,7 +81,9 @@ export default function Import() {
                                 }
                             </span>
                         </p>
-                        <button className="bg-card text-foreground p-2 rounded-xl text-sm">Submit</button>
+                        <button className="bg-card text-foreground p-2 rounded-xl text-sm active:scale-90 hover:bg-card-secondary"
+                        onClick={handleSubmit}
+                        >Submit</button>
                     </span>
                 </div>
                 
