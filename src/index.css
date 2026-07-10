@@ -30,6 +30,8 @@
   --color-sidepanel: var(--sidepanel);
   --color-border: color-mix(in srgb, var(--border) 15%, transparent);
   --color-chat-bubble: var(--chat-bubble);
+  --color-code-foreground: var(--code-foreground);
+  --color-code-background: var(--code-background);
   --font-sans: "Anthropic Sans";
   --font-serif: "Anthropic Serif";
 }
@@ -46,6 +48,8 @@
   --sidepanel: #f7f7f4;
   --border: #1F1F1E;
   --chat-bubble: #efeeeb;
+  --code-foreground: #8d2525;
+  --code-background: #eeeeec;
 }
 
 .dark {
@@ -60,4 +64,25 @@
   --sidepanel: #1d1d1c;
   --border: #E2E1DA;
   --chat-bubble: #121212;
+  --code-foreground: #e59e9e;
+  --code-background: #272725;
+}
+
+strong {
+  font-weight: 500;
+}
+
+code {
+  color: var(--code-foreground);
+  background-color: var(--code-background);
+  padding: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 8px;
+  border-color: var(--color-border);
+  border-width: 1px;
+}
+
+hr {
+  color: color-mix(in srgb, var(--border) 25%, transparent);
 }

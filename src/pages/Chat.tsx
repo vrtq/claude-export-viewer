@@ -1,7 +1,8 @@
 import type { Conversation, ChatMessage, ChatMessageAttachment } from "@/types";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { get } from "idb-keyval";
+import { marked } from "marked";
 
 export default function Chat() {
     const location = useLocation();
@@ -54,8 +55,8 @@ function Conversation({ chatMessages } : { chatMessages: ChatMessage[] | null })
     if (!chatMessages) return;
 
     return (
-        <div className="p-4 w-full h-full flex flex-col items-center justify-center overflow-auto ">
-            <div className="max-w-3xl h-full w-full gap-4 ">
+        <div className="p-4 bg-background overflow-x-hidden w-full h-full flex flex-col items-center justify-center overflow-auto ">
+            <div className="max-w-3xl h-full w-full gap-4 [&_li]:p-1 [&_ul]:list-disc [&_ul]:pl-6">
             {
                 chatMessages.map(chatMessage => 
                     chatMessage.sender == "human"
@@ -73,7 +74,7 @@ function HumanChatBubble({ message } : { message: ChatMessage }) {
         <>
         {
             message.text &&
-            <div className="w-fit max-w-4/5 ml-auto font-sans bg-accent p-3 rounded-xl text-sm md:text-base">
+            <div className="w-fit max-w-4/5 ml-auto font-sans bg-accent p-3 rounded-xl text-sm md:text-base last:pb-32">
                 <p>{message.text}</p>
             </div>
         }
@@ -86,16 +87,28 @@ function HumanChatBubble({ message } : { message: ChatMessage }) {
 }
 
 function AssistantChatBubble({ message } : { message: ChatMessage })  {
+    const divRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!divRef.current) return;
+
+        (async () => {
+            if (!divRef.current) return;
+
+            divRef.current.innerHTML = await marked.parse(message.text);
+        })()
+    }, [message.text]);
+
     return (
-        <div className="max-w-4/5 p-4 text-sm md:text-base">
-            <p>{message.text}</p>
+        <div className="w-fit max-w-sm md:max-w-4/5 p-4 text-sm md:text-base font-light flex flex-col gap-4 last:pb-32" ref={divRef}>
+            {/** Rendered markdown goes here */}
         </div>
     )
 }
 
 function Attachments({ files} : { files: ChatMessageAttachment[] }) {
     return (
-        <div className="w-fit max-w-4/5 ml-auto font-sans p-2 rounded-xl text-sm md:text-base flex flex-row gap-2 ">
+        <div className="w-fit max-w-sm md:max-w-4/5 ml-auto font-sans p-2 rounded-xl text-sm md:text-base flex flex-row gap-2 ">
             {
                 files.map(file => 
                     <div className="border border-border text-foreground-secondary bg-card p-2 rounded-xl flex flex-row gap-2 items-center justify-center">
