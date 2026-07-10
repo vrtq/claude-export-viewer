@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
 import Home from "@/pages/Home"
 import Import from "@/pages/Import"
 import PageNotFound from "@/pages/PageNotFound"
-import Chat from "./pages/Chat"
+import Chat from "@/pages/Chat"
+import Recents from "@/pages/Recents"
 import Sidebar from "@/components/Sidebar"
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/import" element={<Import />} />
                     <Route path="/chat/:id" element={<Chat />} />
+                    <Route path="/recents" element={<Recents />} />
                 </Route>
                 <Route path="/*" element={<PageNotFound />} />
             </Routes>

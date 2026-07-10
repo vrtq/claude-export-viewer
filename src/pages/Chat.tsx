@@ -120,7 +120,7 @@ function AssistantChatBubble({ message } : { message: ChatMessage })  {
 
 function Attachments({ files} : { files: ChatMessageAttachment[] }) {
     return (
-        <div className="w-fit max-w-sm md:max-w-4/5 ml-auto font-sans p-2 rounded-xl text-sm md:text-base flex flex-row gap-2 ">
+        <div className=" max-w-sm md:max-w-4/5 ml-auto font-sans p-2 rounded-xl text-sm md:text-base grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 " dir="rtl">
             {
                 files.map(file => 
                     <div className="border border-border text-foreground-secondary bg-card p-2 rounded-xl flex flex-row gap-2 items-center justify-center">
