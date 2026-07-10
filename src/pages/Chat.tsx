@@ -70,12 +70,24 @@ function Conversation({ chatMessages } : { chatMessages: ChatMessage[] | null })
 }
 
 function HumanChatBubble({ message } : { message: ChatMessage }) {
+    const divRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!divRef.current) return;
+
+        (async () => {
+            if (!divRef.current) return;
+
+            divRef.current.innerHTML = await marked.parse(message.text);
+        })()
+    }, [message.text]);
+
     return (
         <>
         {
             message.text &&
-            <div className="w-fit max-w-4/5 ml-auto font-sans bg-accent p-3 rounded-xl text-sm md:text-base last:pb-32">
-                <p>{message.text}</p>
+            <div ref={divRef} className="w-fit max-w-4/5 ml-auto font-sans bg-accent p-3 rounded-xl text-sm md:text-base last:pb-32">
+                {/** Rendered markdown goes here */}
             </div>
         }
         {
