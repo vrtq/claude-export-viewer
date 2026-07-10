@@ -19,6 +19,7 @@
 
 @theme {
   --color-primary: var(--primary);
+  --color-accent: var(--accent);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-foreground-secondary: var(--foreground-secondary);
@@ -28,12 +29,14 @@
   --color-card-secondary: var(--card-secondary);
   --color-sidepanel: var(--sidepanel);
   --color-border: color-mix(in srgb, var(--border) 15%, transparent);
+  --color-chat-bubble: var(--chat-bubble);
   --font-sans: "Anthropic Sans";
   --font-serif: "Anthropic Serif";
 }
 
 :root {
   --primary: #d97757;
+  --accent: #efeeeb;
   --background: #f8f8f6;
   --foreground: #0b0b0b;
   --foreground-secondary: #31312f;
@@ -42,10 +45,12 @@
   --card-secondary: #f9f9f7;
   --sidepanel: #f7f7f4;
   --border: #1F1F1E;
+  --chat-bubble: #efeeeb;
 }
 
 .dark {
   --primary: #d97757;
+  --accent: #121212;
   --background: #1f1f1e;
   --foreground: #ffffff;
   --foreground-secondary: #c3c2b7;
@@ -54,4 +59,5 @@
   --card-secondary: #363635;
   --sidepanel: #1d1d1c;
   --border: #E2E1DA;
+  --chat-bubble: #121212;
 }
