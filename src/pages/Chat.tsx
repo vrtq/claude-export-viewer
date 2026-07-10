@@ -1,4 +1,4 @@
-import type { Conversation, ChatMessage } from "@/types";
+import type { Conversation, ChatMessage, ChatMessageAttachment } from "@/types";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { get } from "idb-keyval";
@@ -33,6 +33,9 @@ export default function Chat() {
 
     return (
         <div className="w-full h-full flex flex-col">
+            {
+                conversationData && <title>{conversationData?.name}</title>
+            }
             <ChatHeader title={conversationData?.name ?? "Loading..."} />
             <Conversation chatMessages={conversationData?.chat_messages ?? null} />
         </div>
@@ -67,9 +70,18 @@ function Conversation({ chatMessages } : { chatMessages: ChatMessage[] | null })
 
 function HumanChatBubble({ message } : { message: ChatMessage }) {
     return (
-        <div className="w-fit max-w-4/5 ml-auto font-sans bg-accent p-3 rounded-xl text-sm md:text-base">
-            <p>{message.text}</p>
-        </div>
+        <>
+        {
+            message.text &&
+            <div className="w-fit max-w-4/5 ml-auto font-sans bg-accent p-3 rounded-xl text-sm md:text-base">
+                <p>{message.text}</p>
+            </div>
+        }
+        {
+            message.attachments &&
+            <Attachments files={message.attachments} />
+        }
+        </>
     )
 }
 
@@ -77,6 +89,23 @@ function AssistantChatBubble({ message } : { message: ChatMessage })  {
     return (
         <div className="max-w-4/5 p-4 text-sm md:text-base">
             <p>{message.text}</p>
+        </div>
+    )
+}
+
+function Attachments({ files} : { files: ChatMessageAttachment[] }) {
+    return (
+        <div className="w-fit max-w-4/5 ml-auto font-sans p-2 rounded-xl text-sm md:text-base flex flex-row gap-2 ">
+            {
+                files.map(file => 
+                    <div className="border border-border text-foreground-secondary bg-card p-2 rounded-xl flex flex-row gap-2 items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m16 6l-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"></path>
+                        </svg>
+                        <p className="text-muted-foreground select-none">{file.file_name}</p>
+                    </div>
+                )
+            }
         </div>
     )
 }
