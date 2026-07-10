@@ -27,7 +27,7 @@ export default function Chat() {
             }
 
             setConversationData(matchedConversation);
-            console.log(matchedConversation)
+            //console.log(matchedConversation)
             //console.log("Successfully loaded conversation!");
         })()
     }, [chatID]);
@@ -52,18 +52,27 @@ function ChatHeader({ title }: { title: string }) {
 }
 
 function Conversation({ chatMessages } : { chatMessages: ChatMessage[] | null }) {
+    const bottomRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setTimeout(() => {
+            bottomRef.current?.scrollIntoView({ behavior: "instant" });
+        }, 1);
+    }, [chatMessages]);
+
     if (!chatMessages) return;
 
     return (
         <div className="p-4 bg-background overflow-x-hidden w-full h-full flex flex-col items-center justify-center overflow-auto ">
             <div className="max-w-3xl h-full w-full gap-4 [&_li]:p-1 [&_ul]:list-disc [&_ul]:pl-6">
-            {
-                chatMessages.map(chatMessage => 
-                    chatMessage.sender == "human"
-                    ? <HumanChatBubble message={chatMessage} />
-                    : <AssistantChatBubble  message={chatMessage} />
-                )
-            }
+                {
+                    chatMessages.map(chatMessage => 
+                        chatMessage.sender == "human"
+                        ? <HumanChatBubble message={chatMessage} />
+                        : <AssistantChatBubble  message={chatMessage} />
+                    )
+                }
+                <div ref={bottomRef} id="bottomRef" ></div>
             </div>
         </div>
     )
