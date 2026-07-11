@@ -72,7 +72,7 @@ function Conversation({ chatMessages } : { chatMessages: ChatMessage[] | null })
                         : <AssistantChatBubble  message={chatMessage} />
                     )
                 }
-                <div ref={bottomRef} id="bottomRef" ></div>
+                <div ref={bottomRef} id="bottomRef" className="pb-32" ></div>
             </div>
         </div>
     )
@@ -95,7 +95,7 @@ function HumanChatBubble({ message } : { message: ChatMessage }) {
         <>
         {
             message.text &&
-            <div ref={divRef} className="w-fit max-w-4/5 ml-auto font-sans bg-accent p-3 rounded-xl text-sm md:text-base last:pb-32">
+            <div ref={divRef} className="w-fit max-w-4/5 ml-auto font-sans bg-accent p-3 rounded-xl text-sm md:text-base">
                 {/** Rendered markdown goes here */}
             </div>
         }
@@ -121,7 +121,7 @@ function AssistantChatBubble({ message } : { message: ChatMessage })  {
     }, [message.text]);
 
     return (
-        <div className="w-fit max-w-sm md:max-w-4/5 p-4 text-sm md:text-base font-light flex flex-col gap-4 last:pb-32" ref={divRef}>
+        <div className="w-fit max-w-sm md:max-w-4/5 p-4 text-sm md:text-base font-light flex flex-col gap-4" ref={divRef}>
             {/** Rendered markdown goes here */}
         </div>
     )

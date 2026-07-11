@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Home() {
     return (
         <div className="bg-background w-full h-full p-8">
@@ -15,8 +17,8 @@ export default function Home() {
                     <p className="text-muted-foreground font-sans">What are you searching for today?</p>
                 </div>
                 { /* Option Buttons */}
-                <div className="font-sans text-foreground text-sm font-normal">
-                    <button className="h-10 bg-card-secondary p-2 rounded-lg flex flex-row items-center gap-2 ">
+                <div className="font-sans text-foreground text-sm font-normal flex items-center gap-4">
+                    <OptionButton>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" className="text-muted-foreground">
                             <path d="M0 0h24v24H0z" fill="none" />
                             <g fill="none" stroke="currentColor" stroke-width="2">
@@ -24,10 +26,26 @@ export default function Home() {
                                 <path stroke-linecap="round" d="M10 8.484C10.5 7.494 11 7 12 7c1.246 0 2 .989 2 1.978s-.5 1.483-2 2.473V13m0 3.5v.5" />
                             </g>
                         </svg>
-                        I'm feel lucky
-                    </button>
+                        <p className="text-foreground">I'm feel lucky</p>
+                    </OptionButton>
+                    <OptionButton>
+                        <Link to="https://claude.ai" className="w-full h-full flex flex-row items-center justify-center gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 3h6v6m-11 5L21 3m-3 10v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            </svg>
+                            <p className="text-foreground">Visit Claude.ai</p>
+                        </Link>
+                    </OptionButton>
                 </div>
             </div>
         </div>    
+    )
+}
+
+function OptionButton({ children } : { children?: React.ReactNode}) {
+    return (
+        <button className="h-10 w-36 text-muted-foreground bg-card-secondary p-2 rounded-lg flex flex-row items-center justify-center gap-2 hover:bg-foreground-secondary/25 hover:cursor-pointer">
+            { children }
+        </button>
     )
 }
