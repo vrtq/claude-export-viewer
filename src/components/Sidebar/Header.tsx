@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 export default function Header() {
     return (
         <div className="flex flex-row justify-between">
-            <h2 className="text-2xl font-normal">Exports</h2>
+            <Link to="/" className="text-2xl font-normal">Exports</Link>
             <div className="text-muted-foreground flex flex-row gap-4">
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
