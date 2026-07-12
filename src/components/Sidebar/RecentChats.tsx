@@ -20,7 +20,7 @@ export default function RecentChats() {
                 {
                     recentChats.length > 0
                     ? recentChats.map(chat => <Chat data={chat} /> )
-                    : <li key="nothing" className="text-foreground-secondary">Nothing yet...</li>
+                    : <li key="nothing" className="text-foreground-secondary text-sm pt-2">Nothing yet...</li>
                 }
             </ul>
         </div>

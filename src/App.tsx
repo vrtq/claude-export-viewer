@@ -4,6 +4,7 @@ import Import from "@/pages/Import"
 import PageNotFound from "@/pages/PageNotFound"
 import Chat from "@/pages/Chat"
 import Recents from "@/pages/Recents"
+import Projects from "@/pages/Projects"
 import Sidebar from "@/components/Sidebar"
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
                     <Route path="/import" element={<Import />} />
                     <Route path="/chat/:id" element={<Chat />} />
                     <Route path="/recents" element={<Recents />} />
+                    <Route path="/projects" element={<Projects />} />
                 </Route>
                 <Route path="/*" element={<PageNotFound />} />
             </Routes>

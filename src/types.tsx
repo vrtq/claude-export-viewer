@@ -61,3 +61,14 @@ export type UserData = {
     email_address: string;
     verified_phone_number: string;
 }
+
+export type Project = {
+    uuid: string;
+    name: string;
+    description: string;
+    is_private: boolean;
+    is_starter_project: boolean;
+    prompt_template: string;
+    created_at: string;
+    updated_at: string;
+}

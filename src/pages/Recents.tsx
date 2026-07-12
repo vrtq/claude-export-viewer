@@ -48,7 +48,7 @@ function SearchBox({ setSearchQuery }: { setSearchQuery: React.Dispatch<React.Se
                     <circle cx={11} cy={11} r={8}></circle>
                 </g>
             </svg>
-            <input value={searchInput} type="text" className="text-foreground text-sm w-full" placeholder="Search Chats..." 
+            <input value={searchInput} type="text" className="text-foreground text-sm w-full" placeholder="Search chats..." 
                 onChange={(e) => {
                     setSearchInput(e.target.value);
                 }}
