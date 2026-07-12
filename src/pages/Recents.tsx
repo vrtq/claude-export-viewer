@@ -1,6 +1,6 @@
 import { type Conversation } from "@/types";
 import { get } from "idb-keyval";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 export default function Recents() {
@@ -58,8 +58,17 @@ function SearchBox({ setSearchQuery }: { setSearchQuery: React.Dispatch<React.Se
 }
 
 function ChatList({ searchQuery }: { searchQuery: string }) {
-    const [recentChats, setRecentChats] = useState<Conversation[]>([]);
     const [allChats, setAllChats] = useState<Conversation[]>([]);
+
+    const recentChats = useMemo(() => {
+            const lowerQuery = searchQuery.toLowerCase();
+
+            if (!searchQuery) return allChats;
+
+            return allChats.filter(chat => 
+            chat.name.toLowerCase().includes(lowerQuery)
+            || chat.chat_messages.some(message => message.text.includes(lowerQuery)))
+    }, [allChats, searchQuery])
 
     // Fetch all chats on mount and sort by date (first to last)
     useEffect(() => {
@@ -71,24 +80,9 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
 
             const conversations: Conversation[] = await get('conversations') ?? [];
             
-            setRecentChats(sortByDate(conversations));
             setAllChats(sortByDate(conversations));
         })();
     }, []);
-
-    useEffect(() => {
-        if (!searchQuery || searchQuery === "") {
-            setRecentChats(allChats);
-            return;
-        };
-
-        const matchedChats = allChats.filter(chat => 
-            chat.name.includes(searchQuery)
-            || chat.chat_messages.some(message => message.text.includes(searchQuery))
-        );
-        
-        setRecentChats(matchedChats);
-    }, [searchQuery]);
 
     return (
         <div className="h-full w-full overflow-y-auto">
@@ -106,7 +100,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
 function Chat({ data }: { data: Conversation; }) {
     return (
         <li key={data.uuid} className="peer border-t-card border-t first:border-t-0 hover:border-0 [.peer:hover+&]:border-0">
-            <Link to={`/chat/${data.uuid}`} className="flex flex-row p-2 justify-between rounded-md hover:bg-card">
+            <Link to={`/chat/${data.uuid}`} className="flex flex-row p-2 gap-1 justify-between rounded-md hover:bg-card">
                 <p className="">{data.name}</p>
                 <p className="text-muted-foreground text-sm">{new Date(data.updated_at).toLocaleDateString()}</p>
             </Link>
