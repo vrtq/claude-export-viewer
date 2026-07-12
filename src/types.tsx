@@ -54,3 +54,10 @@ export type ChatMessageAttachment = {
     file_size: number;
     file_type: string;
 }
+
+export type UserData = {
+    uuid: string;
+    full_name: string;
+    email_address: string;
+    verified_phone_number: string;
+}

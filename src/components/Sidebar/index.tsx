@@ -5,7 +5,7 @@ import UserProfile from "./UserProfile";
 
 export default function Sidebar() {
     return (
-        <nav className="bg-sidepanel w-full h-full p-3 border-r border-r-border flex flex-col gap-6 ">
+        <nav className="bg-sidepanel w-full h-full border-r border-r-border flex flex-col">
             <Header />
             <Links />
             <RecentChats />

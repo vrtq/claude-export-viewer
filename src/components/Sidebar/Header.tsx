@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
     return (
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between p-3">
             <Link to="/" className="text-2xl font-normal">Exports</Link>
             <div className="text-muted-foreground flex flex-row gap-4">
                 <button>

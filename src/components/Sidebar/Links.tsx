@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 export default function Links() {
     return (
-        <div className="w-full flex flex-col gap-1 font-sans text-sm">
+        <div className="w-full flex flex-col gap-1 font-sans text-sm p-3">
             <SidebarLink to="import">
                 <div className="size-5">
                     <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" className="bg-card rounded-full p-0.5">
