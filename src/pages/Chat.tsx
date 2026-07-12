@@ -27,7 +27,7 @@ export default function Chat() {
             }
 
             setConversationData(matchedConversation);
-            //console.log(matchedConversation)
+            console.log(matchedConversation)
             //console.log("Successfully loaded conversation!");
         })()
     }, [chatID]);

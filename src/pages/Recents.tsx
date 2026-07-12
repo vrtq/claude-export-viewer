@@ -21,9 +21,6 @@ function Header({ setSearchQuery }: { setSearchQuery: React.Dispatch<React.SetSt
         <div className="w-full flex flex-col font-sans gap-4 bg-background p-2">
             <div className="flex flex-row justify-between">
                 <h1 className="text-2xl font-serif">Chats</h1>
-                <button className="bg-card p-2 px-4 rounded-xl ">
-                    <span className="text-foreground-secondary">Filter by ...</span>
-                </button>
             </div>
             <SearchBox setSearchQuery={setSearchQuery} />
         </div>
