@@ -57,14 +57,29 @@ function SearchBox({ setSearchQuery }: { setSearchQuery: React.Dispatch<React.Se
 }
 
 function ProjectList({ searchQuery }: { searchQuery: string }) {
+    const [projects, setProjects] = useState<Project[]>(fetchProjects);
+
+    function fetchProjects(): Project[] {
+        return JSON.parse(localStorage.getItem("projects") ?? "[]");
+    }
 
     return (
-        <></>
+        <div className="grid grid-cols-1 md:grid-cols-2 p-2">
+            {
+                projects.map(project => 
+                    <ProjectCard project={project} />
+                )
+            }
+        </div>
     )
 }
 
 function ProjectCard({ project } : { project: Project}) {
     return (
-        <div className=""></div>
+        <div className="bg-project-card-background border border-border h-36 p-4 text-sm rounded-xl font-sans flex flex-col justify-between hover:bg-card hover:cursor-pointer">
+            <h2>{project.name}</h2>
+            <p className="text-foreground-secondary">{project.description}</p>
+            <p className="text-muted-foreground">Updated {new Date(project.updated_at).toLocaleDateString()}</p>
+        </div>
     )
 }

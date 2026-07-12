@@ -27,7 +27,7 @@ export default function App() {
 function Layout() {
     return (
         <div className="font-serif bg-background text-foreground flex flex-row w-screen h-screen">
-            <div className="w-[18rem]">
+            <div className="w-48 lg:w-[18rem]">
                 <Sidebar />
             </div>
             <Outlet />

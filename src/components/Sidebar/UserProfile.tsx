@@ -12,7 +12,7 @@ export default function UserProfile() {
             return;
         }
 
-        setUserData(JSON.parse(loadedData ?? "")[0]);
+        setUserData(JSON.parse(loadedData ?? "{}")[0]);
     }, []);
 
     return (

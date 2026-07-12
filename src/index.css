@@ -32,6 +32,7 @@
   --color-chat-bubble: var(--chat-bubble);
   --color-code-foreground: var(--code-foreground);
   --color-code-background: var(--code-background);
+  --color-project-card-background: var(--project-card-background);
   --font-sans: "Anthropic Sans";
   --font-serif: "Anthropic Serif";
 }
@@ -50,6 +51,7 @@
   --chat-bubble: #efeeeb;
   --code-foreground: #8d2525;
   --code-background: #eeeeec;
+  --project-card-background: #fcfcfb;
 }
 
 .dark {
@@ -66,6 +68,7 @@
   --chat-bubble: #121212;
   --code-foreground: #e59e9e;
   --code-background: #272725;
+  --project-card-background: #1a1a19;
 }
 
 strong {
