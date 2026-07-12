@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
-
+import { get } from "idb-keyval";
+import { useNavigate } from "react-router-dom";
+import type { Conversation } from "@/types";
 export default function Home() {
+    const navigate = useNavigate();
+
     return (
         <div className="bg-background w-full h-full p-8">
             { /* Centered */}
@@ -18,7 +22,17 @@ export default function Home() {
                 </div>
                 { /* Option Buttons */}
                 <div className="font-sans text-foreground text-sm font-normal flex items-center gap-4">
-                    <OptionButton>
+                    <OptionButton onClick={async () => {
+                        const conversations: Conversation[] = await get("conversations") ?? [];
+                        
+                        if (!conversations) {
+                            console.error("Could not load conversations");
+                            return;
+                        }
+
+                        const randomIndex = Math.floor(Math.random() * conversations.length);
+                        navigate(`/chat/${conversations[randomIndex].uuid}`)
+                    }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" className="text-muted-foreground">
                             <path d="M0 0h24v24H0z" fill="none" />
                             <g fill="none" stroke="currentColor" stroke-width="2">
@@ -42,9 +56,9 @@ export default function Home() {
     )
 }
 
-function OptionButton({ children } : { children?: React.ReactNode}) {
+function OptionButton({ children, onClick } : { children?: React.ReactNode, onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined}) {
     return (
-        <button className="h-10 w-36 text-muted-foreground bg-card-secondary p-2 rounded-lg flex flex-row items-center justify-center gap-2 hover:bg-foreground-secondary/25 hover:cursor-pointer">
+        <button onClick={onClick} className="h-10 w-36 text-muted-foreground bg-card-secondary p-2 rounded-lg flex flex-row items-center justify-center gap-2 hover:bg-foreground-secondary/25 hover:cursor-pointer">
             { children }
         </button>
     )
