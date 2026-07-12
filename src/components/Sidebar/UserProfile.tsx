@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
 import type { UserData } from "@/types";
 
 export default function UserProfile() {
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const userData = fetchData();
 
-    useEffect(() => {
+    function fetchData(): UserData | null {
         const loadedData = localStorage.getItem("userData");
 
         if (!loadedData) {
             console.error("Could not find user data");
-            return;
+            return null;
         }
 
-        setUserData(JSON.parse(loadedData ?? "{}")[0]);
-    }, []);
+        return JSON.parse(loadedData ?? "[]")[0];
+    }
 
     return (
         <div className="h-20 w-full border-t border-t-border p-3 hover:bg-accent font-sans text-foreground-secondary hover:cursor-pointer">

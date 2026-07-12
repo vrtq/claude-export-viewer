@@ -31,7 +31,7 @@ export default function Home() {
                         }
 
                         const randomIndex = Math.floor(Math.random() * conversations.length);
-                        navigate(`/chat/${conversations[randomIndex].uuid}`)
+                        navigate(`/chat/${conversations[randomIndex].uuid}`);
                     }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" className="text-muted-foreground">
                             <path d="M0 0h24v24H0z" fill="none" />
