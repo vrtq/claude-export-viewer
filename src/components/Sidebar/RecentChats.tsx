@@ -19,7 +19,7 @@ export default function RecentChats() {
             <ul className="flex flex-col -mt-2">
                 {
                     recentChats.length > 0
-                    ? recentChats.map(chat => <Chat data={chat} /> )
+                    ? recentChats.map(chat => <Chat key={chat.uuid} data={chat} /> )
                     : <li key="nothing" className="text-foreground-secondary text-sm pt-2">Nothing yet...</li>
                 }
             </ul>

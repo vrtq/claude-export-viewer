@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Project } from "@/types";
 
 export default function Projects() {
@@ -57,18 +57,26 @@ function SearchBox({ setSearchQuery }: { setSearchQuery: React.Dispatch<React.Se
 }
 
 function ProjectList({ searchQuery }: { searchQuery: string }) {
-    const [projects, setProjects] = useState<Project[]>(fetchProjects);
+    const projects = useMemo(() => {
+        const fetchedProjects: Project[] = JSON.parse(localStorage.getItem("projects") ?? "[]");
+        const lowerQuery = searchQuery.toLowerCase();
 
-    function fetchProjects(): Project[] {
-        return JSON.parse(localStorage.getItem("projects") ?? "[]");
-    }
+        if (!searchQuery) {
+            return fetchedProjects;
+        }
+
+        return fetchedProjects.filter(project => 
+                    project.name.toLowerCase().includes(lowerQuery)
+                    || project.description.toLowerCase().includes(lowerQuery)
+                );
+    }, [searchQuery]);
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 p-2">
             {
-                projects.map(project => 
-                    <ProjectCard project={project} />
-                )
+                projects.map((project: Project) => 
+                    <ProjectCard key={project.uuid} project={project} />
+                )            
             }
         </div>
     )
