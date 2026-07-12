@@ -1,75 +1,45 @@
-# React + TypeScript + Vite
+# claude-export-viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend-only viewer for your exported Claude.ai conversation data. Export your data from Claude, drag and drop or upload the `conversations.json`, and browse your conversations in a UI that feels familiar.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Drag-and-drop loading of your Claude data export
+- Full markdown rendering, including code blocks
+- Search across your conversations
+- Shows projects
+- Shows attachment names (note: the export doesn't include actual attachment files, so those aren't viewable - just referenced)
+- Clean, familiar UI - built to feel like the real thing
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Clone the repo,
 
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+git clone https://github.com/vrtq/claude-export-viewer.git
+```
+then:
 
 ```
+cd claude-export-viewer
+npm install
+npm run dev
+```
+
+The app will be available locally. Open the link Vite gives you in the terminal.
+
+## Usage
+
+1. Export your data from Claude.ai
+2. Once you get the export file, drag and drop (or upload) your `conversations.json` into the app
+3. Browse and search your conversations
+
+You can also drag and drop projects, user data, or memories and view them.
+## Notes
+
+This is entirely client-side. Your export file is never sent anywhere - it's parsed and rendered locally in your browser.
