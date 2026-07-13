@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom";
 
-export default function Header() {
-    return (
-        <div className="flex flex-row justify-between p-3">
-            <Link to="/" className="text-xl font-normal">Exports</Link>
+export default function Header({ 
+    openState
+}: {
+    openState: {
+    isOpen: boolean;
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}}) {
+    const {isOpen, setIsOpen} = openState;
+
+    return (        
+        <div className={"flex flex-row justify-between p-3" + (isOpen ? "" : " justify-center!" ) }>
+            <Link hidden={!isOpen} to="/" className="text-xl font-normal">Exports</Link>
             <div className="text-foreground-secondary flex flex-row gap-2">
-                <button className="p-1 rounded-sm hover:cursor-pointer hover:bg-card hover:text-foreground ">
+                <button hidden={!isOpen} className="p-1 rounded-sm hover:cursor-pointer hover:bg-card hover:text-foreground ">
                     <Link to="/recents" className="w-full h-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} viewBox="0 0 24 24">
                             <path d="M0 0h24v24H0z" fill="none" />
@@ -16,7 +24,10 @@ export default function Header() {
                         </svg>
                     </Link>
                 </button>
-                <button className="p-1 rounded-sm hover:cursor-pointer hover:bg-card hover:text-foreground ">
+                <button className="p-1 rounded-sm hover:cursor-pointer hover:bg-card hover:text-foreground"
+                onClick={() => {
+                    setIsOpen(prev => !prev)
+                }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0z" fill="none" />
                         <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
