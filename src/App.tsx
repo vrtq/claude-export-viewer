@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { ThemeContext, type Theme } from "@/contexts/ThemeContext";
 import Home from "@/pages/Home"
 import Import from "@/pages/Import"
 import PageNotFound from "@/pages/PageNotFound"
@@ -8,19 +10,29 @@ import Projects from "@/pages/Projects"
 import Sidebar from "@/components/Sidebar"
 
 export default function App() {
+    const loadedTheme = localStorage.getItem("theme");
+    const [theme, setTheme] = useState<Theme>(loadedTheme === "dark" ? loadedTheme : "light");
+    
+    useEffect(() => {
+        document.documentElement.classList = (theme === "dark") ? "dark" : "light";
+        localStorage.setItem("theme", (theme === "dark" ? "dark" : "light"))
+    }, [theme]);
+
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route element={<Layout />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/import" element={<Import />} />
-                    <Route path="/chat/:id" element={<Chat />} />
-                    <Route path="/recents" element={<Recents />} />
-                    <Route path="/projects" element={<Projects />} />
-                </Route>
-                <Route path="/*" element={<PageNotFound />} />
-            </Routes>
-        </BrowserRouter>
+        <ThemeContext.Provider value={{theme, setTheme}}>
+            <BrowserRouter>
+                <Routes>
+                    <Route element={<Layout />}>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/import" element={<Import />} />
+                        <Route path="/chat/:id" element={<Chat />} />
+                        <Route path="/recents" element={<Recents />} />
+                        <Route path="/projects" element={<Projects />} />
+                    </Route>
+                    <Route path="/*" element={<PageNotFound />} />
+                </Routes>
+            </BrowserRouter>
+        </ThemeContext.Provider>
     )
 }
 

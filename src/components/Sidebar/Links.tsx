@@ -8,7 +8,6 @@ export default function Links({
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }}) {
     const { isOpen } = openState;
-    console.log("isOpen:", isOpen)
     return (
         <div className="w-full flex flex-col gap-1 font-sans text-sm p-3">
             <SidebarLink to="import">

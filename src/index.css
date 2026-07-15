@@ -32,6 +32,8 @@
   --color-chat-bubble: var(--chat-bubble);
   --color-code-foreground: var(--code-foreground);
   --color-code-background: var(--code-background);
+  --color-pre-background: var(--pre-background);
+  --color-pre-foreground: var(--pre-foreground);
   --color-project-card-background: var(--project-card-background);
   --font-sans: "Anthropic Sans";
   --font-serif: "Anthropic Serif";
@@ -51,6 +53,8 @@
   --chat-bubble: #efeeeb;
   --code-foreground: #8d2525;
   --code-background: #eeeeec;
+  --pre-background: #fcfcfb;
+  --pre-foreground: var(--color-foreground);
   --project-card-background: #fcfcfb;
 }
 
@@ -68,6 +72,8 @@
   --chat-bubble: #121212;
   --code-foreground: #e59e9e;
   --code-background: #272725;
+  --pre-background: #252524;
+  --pre-foreground: var(--color-foreground);
   --project-card-background: #1a1a19;
 }
 
@@ -92,7 +98,7 @@ code {
 }
 
 pre {
-  background-color: #252524;
+  background-color: var(--pre-background);
   color: var(--foreground);
   font-family: var(--font-sans);
   padding: 8px; 
