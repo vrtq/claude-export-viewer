@@ -4,7 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 export default function Recents() {
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState(location.search.split('?q=').at(-1) ?? "");
 
     return (
         <div className="p-8 w-full bg-background h-full flex flex-col items-center ">
@@ -28,12 +28,12 @@ function Header({ setSearchQuery }: { setSearchQuery: React.Dispatch<React.SetSt
 }
 
 function SearchBox({ setSearchQuery }: { setSearchQuery: React.Dispatch<React.SetStateAction<string>> }) {
-    const [searchInput, setSearchInput] = useState("");
+    const [searchInput, setSearchInput] = useState(location.search.split('?q=').at(-1) ?? "");
 
     useEffect(() => {
         const debounce = setTimeout(() => {
             setSearchQuery(searchInput);
-        }, 400);
+        }, 100);
 
         return () => {
             clearTimeout(debounce);
@@ -67,7 +67,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
 
             return allChats.filter(chat => 
             chat.name.toLowerCase().includes(lowerQuery)
-            || chat.chat_messages.some(message => message.text.includes(lowerQuery)))
+            || chat.chat_messages.some(message => message.text.includes(lowerQuery)));
     }, [allChats, searchQuery])
 
     // Fetch all chats on mount and sort by date (first to last)

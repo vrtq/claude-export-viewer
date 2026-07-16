@@ -9,7 +9,7 @@ export default function RecentChats() {
     useEffect(() => {
         (async () => {
             const conversations: Conversation[] = await get('conversations') ?? [];
-            setRecentChats(conversations)
+            setRecentChats(conversations);
         })();
     }, []);
 

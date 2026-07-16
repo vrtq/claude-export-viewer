@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import { useState } from "react";
 import { get } from "idb-keyval";
-import { useNavigate } from "react-router-dom";
 import type { Conversation } from "@/types";
+
 export default function Home() {
     const navigate = useNavigate();
+    const [query, setQuery] = useState("");
 
     return (
         <div className="bg-background w-full h-full p-8">
@@ -18,7 +20,17 @@ export default function Home() {
                 </div>
                 { /* Search box */}
                 <div className="w-92 lg:w-lg bg-card rounded-2xl p-4">
-                    <p className="text-muted-foreground font-sans">What are you searching for today?</p>
+                    <input type="text" value={query} className="text-muted-foreground font-sans w-full" placeholder="What are you searching for today?"
+                    onChange={(e) => {
+                        setQuery(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key != "Enter") {
+                            return;
+                        }
+
+                        navigate(`/recents/?q=${query}`);
+                    }}/>
                 </div>
                 { /* Option Buttons */}
                 <div className="font-sans text-foreground text-sm font-normal flex items-center gap-4">
