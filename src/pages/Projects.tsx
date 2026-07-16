@@ -74,9 +74,9 @@ function ProjectList({ searchQuery }: { searchQuery: string }) {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 p-2">
             {
-                projects.map((project: Project) => 
-                    <ProjectCard key={project.uuid} project={project} />
-                )            
+                projects.length > 0 
+                ? projects.map(project => <ProjectCard key={project.uuid} project={project} />) 
+                : <p key="nothing" className="text-foreground-secondary font-sans p-2">Nothing yet...</p>           
             }
         </div>
     )
