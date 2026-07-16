@@ -38,7 +38,7 @@ export default function Home() {
                     }}/>
                 </div>
                 { /* Option Buttons */}
-                <div className="font-sans text-foreground text-sm font-normal flex items-center gap-4">
+                <div className="font-sans text-foreground text-sm font-normal flex items-center gap-2">
                     <OptionButton onClick={async () => {
                         const conversations: Conversation[] = await get("conversations") ?? [];
                         
@@ -50,21 +50,40 @@ export default function Home() {
                         const randomIndex = Math.floor(Math.random() * conversations.length);
                         navigate(`/chat/${conversations[randomIndex].uuid}`);
                     }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" className="text-muted-foreground">
-                            <path d="M0 0h24v24H0z" fill="none" />
-                            <g fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10" />
-                                <path stroke-linecap="round" d="M10 8.484C10.5 7.494 11 7 12 7c1.246 0 2 .989 2 1.978s-.5 1.483-2 2.473V13m0 3.5v.5" />
-                            </g>
+                        <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.17 7.83L2 22m2.02-10a2.827 2.827 0 1 1 3.81-4.17A2.827 2.827 0 1 1 12 4.02a2.827 2.827 0 1 1 4.17 3.81A2.827 2.827 0 1 1 19.98 12a2.827 2.827 0 1 1-3.81 4.17A2.827 2.827 0 1 1 12 19.98a2.827 2.827 0 1 1-4.17-3.81A1 1 0 1 1 4 12m3.83-4.17l8.34 8.34"></path>
                         </svg>
-                        <p className="text-foreground">I'm feel lucky</p>
+                        <p className="text-foreground">Random</p>
+                    </OptionButton>
+                    <OptionButton>
+                        <Link to="/help" className="w-full h-full flex flex-row items-center justify-center gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" className="text-muted-foreground">
+                                <path d="M0 0h24v24H0z" fill="none" />
+                                <g fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path stroke-linecap="round" d="M10 8.484C10.5 7.494 11 7 12 7c1.246 0 2 .989 2 1.978s-.5 1.483-2 2.473V13m0 3.5v.5" />
+                                </g>
+                            </svg>
+                            <p className="text-foreground">Help</p>
+                        </Link>
+                    </OptionButton>
+                    <OptionButton>
+                        <Link to="/disclaimer" className="w-full h-full flex flex-row items-center justify-center gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24">
+                                <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}>
+                                    <circle cx={12} cy={12} r={10}></circle>
+                                    <path d="M12 8v4m0 4h.01"></path>
+                                </g>
+                            </svg>
+                            <p className="text-foreground">Disclaimer</p>
+                        </Link>
                     </OptionButton>
                     <OptionButton>
                         <Link to="https://claude.ai" className="w-full h-full flex flex-row items-center justify-center gap-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24">
                                 <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 3h6v6m-11 5L21 3m-3 10v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                             </svg>
-                            <p className="text-foreground">Visit Claude.ai</p>
+                            <p className="text-foreground">Claude.ai</p>
                         </Link>
                     </OptionButton>
                 </div>
@@ -75,7 +94,7 @@ export default function Home() {
 
 function OptionButton({ children, onClick } : { children?: React.ReactNode, onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined}) {
     return (
-        <button onClick={onClick} className="h-10 w-36 text-muted-foreground bg-card-secondary p-2 rounded-lg flex flex-row items-center justify-center gap-2 hover:bg-foreground-secondary/25 hover:cursor-pointer">
+        <button onClick={onClick} className="h-10 text-muted-foreground bg-card-secondary p-2 rounded-lg flex flex-row items-center justify-center gap-2 hover:bg-foreground-secondary/25 hover:cursor-pointer">
             { children }
         </button>
     )
