@@ -68,14 +68,14 @@ export default function Home() {
                         </Link>
                     </OptionButton>
                     <OptionButton>
-                        <Link to="/disclaimer" className="w-full h-full flex flex-row items-center justify-center gap-2 ">
+                        <Link to="/about" className="w-full h-full flex flex-row items-center justify-center gap-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24">
                                 <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}>
                                     <circle cx={12} cy={12} r={10}></circle>
                                     <path d="M12 8v4m0 4h.01"></path>
                                 </g>
                             </svg>
-                            <p className="text-foreground">Disclaimer</p>
+                            <p className="text-foreground">About</p>
                         </Link>
                     </OptionButton>
                     <OptionButton>
@@ -87,6 +87,7 @@ export default function Home() {
                         </Link>
                     </OptionButton>
                 </div>
+                <p className="text-xs text-foreground-secondary p-2 pb-4 fixed bottom-0">This project is independent and is not affiliated with, endorsed by, or sponsored by Anthropic. All trademarks belong to their respective owners. Use this tool at your own discretion.</p>
             </div>
         </div>    
     )
