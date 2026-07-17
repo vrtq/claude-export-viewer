@@ -7,6 +7,7 @@ import PageNotFound from "@/pages/PageNotFound"
 import Chat from "@/pages/Chat"
 import Recents from "@/pages/Recents"
 import Projects from "@/pages/Projects"
+import Help from "@/pages/Help"
 import Sidebar from "@/components/Sidebar"
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
                         <Route path="/chat/:id" element={<Chat />} />
                         <Route path="/recents" element={<Recents />} />
                         <Route path="/projects" element={<Projects />} />
+                        <Route path="/help" element={<Help />} />
                     </Route>
                     <Route path="/*" element={<PageNotFound />} />
                 </Routes>
