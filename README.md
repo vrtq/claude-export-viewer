@@ -40,6 +40,16 @@ The app will be available locally. Open the link Vite gives you in the terminal.
 3. Browse and search your conversations
 
 You can also drag and drop projects, user data, or memories and view them.
+
 ## Notes
 
 This is entirely client-side. Your export file is never sent anywhere - it's parsed and rendered locally in your browser.
+
+## Images
+Images showcasing the website. Placeholder text has been used.
+
+<img src="assets/1.png">
+<img src="assets/2.png">
+
+(Light Mode)
+<img src="assets/3.png">
