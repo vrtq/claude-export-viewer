@@ -31,7 +31,7 @@ function Chat({ data }: { data: Conversation; }) {
     return (
         <li key={data.uuid} className="mt-1 mr-5 pt-1 p-2 text-foreground-secondary rounded-lg hover:bg-accent hover:text-foreground">
             <Link to={`/chat/${data.uuid}`}>
-                <p className="text-sm  overflow-hidden text-ellipsis truncate ">{data.name}</p>
+                <p className="text-sm overflow-hidden text-ellipsis truncate ">{data.name ? data.name : "Unnamed chat"}</p>
             </Link>
         </li>
     )

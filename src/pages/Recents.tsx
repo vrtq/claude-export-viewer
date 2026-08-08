@@ -89,7 +89,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
             <ul className="h-full w-full p-4 font-sans">
                 {
                     recentChats.length > 0
-                    ? recentChats.map(chat => <Chat data={chat} /> )
+                    ? recentChats.map(chat => <Chat data={chat} key={chat.uuid} /> )
                     : <li key="nothing" className="text-foreground-secondary">Nothing yet...</li>
                 }
             </ul>

@@ -7,7 +7,6 @@ export default function UserProfile() {
         const loadedData = localStorage.getItem("userData");
 
         if (!loadedData) {
-            console.error("Could not find user data");
             return null;
         }
 

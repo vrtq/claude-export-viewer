@@ -46,7 +46,7 @@ export default function Chat() {
 function ChatHeader({ title }: { title: string }) {
     return (
         <div className="font-sans h-16 p-2 px-4 bg-background w-full ">
-            <h1 className="hover:bg-card w-fit p-1 px-2 rounded-md text-sm">{title}</h1>
+            <h1 className="hover:bg-card w-fit p-1 px-2 rounded-md text-sm">{title ? title : "Unnamed chat"}</h1>
         </div>
     )
 }
@@ -60,17 +60,21 @@ function Conversation({ chatMessages } : { chatMessages: ChatMessage[] | null })
         }, 1);
     }, [chatMessages]);
 
-    if (!chatMessages) return;
+    const isChatEmpty = chatMessages?.every(chat => !chat.text);
 
     return (
         <div className="p-4 bg-background overflow-x-hidden w-full h-full flex flex-col items-center justify-center overflow-auto ">
             <div className="max-w-3xl h-full w-full gap-4 [&_li]:p-1 [&_ul]:list-disc [&_ul]:pl-6">
                 {
-                    chatMessages.map(chatMessage => 
-                        chatMessage.sender == "human"
-                        ? <HumanChatBubble message={chatMessage} />
-                        : <AssistantChatBubble  message={chatMessage} />
-                    )
+                    (!chatMessages || chatMessages.length == 0 || isChatEmpty)
+                    ?    <div className="w-full h-full flex flex-col items-center justify-center">
+                            <p className="italic font-sans text-foreground-secondary">Empty chat.</p>
+                        </div>
+                    :    chatMessages?.map(chatMessage => 
+                            chatMessage.sender == "human"
+                            ? <HumanChatBubble message={chatMessage} />
+                            : <AssistantChatBubble  message={chatMessage} />
+                        )
                 }
                 <div ref={bottomRef} id="bottomRef" className="pb-32" ></div>
             </div>
