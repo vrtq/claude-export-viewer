@@ -101,7 +101,7 @@ function Chat({ data }: { data: Conversation; }) {
     return (
         <li key={data.uuid} className="peer border-t-card border-t first:border-t-0 hover:border-0 [.peer:hover+&]:border-0">
             <Link to={`/chat/${data.uuid}`} className="flex flex-row p-2 gap-1 justify-between rounded-md hover:bg-card">
-                <p className="">{data.name}</p>
+                <p className="">{data.name ? data.name : "Unnamed chat"}</p>
                 <p className="text-muted-foreground text-sm">{new Date(data.updated_at).toLocaleDateString()}</p>
             </Link>
         </li>
